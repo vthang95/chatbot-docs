@@ -70,17 +70,22 @@
 			"anchors": [
 				{
 					"anchor": "Documentation",
-					"href": "https://mintlify.com/docs",
+					"href": "https://docs.aichatbot.im",
 					"icon": "book-open-cover"
 				},
 				{
-					"anchor": "Community",
-					"href": "https://mintlify.com/community",
-					"icon": "slack"
+					"anchor": "Telegram",
+					"href": "https://t.me/+146hSlJz0zU1OTZl",
+					"icon": "telegram"
+				},
+                {
+					"anchor": "Discord",
+					"href": "https://discord.gg/E2DDmWJX",
+					"icon": "discord"
 				},
 				{
 					"anchor": "Blog",
-					"href": "https://mintlify.com/blog",
+					"href": "https://blog.aichatbot.im",
 					"icon": "newspaper"
 				}
 			]
