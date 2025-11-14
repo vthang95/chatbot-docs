@@ -1,7 +1,7 @@
 {
 	"components": {
 		"schemas": {
-			"CreateBotInputBody": {
+			"CreateBotRequestBody": {
 				"additionalProperties": false,
 				"properties": {
 					"delay": {
@@ -25,6 +25,46 @@
 					}
 				},
 				"required": ["name"],
+				"type": "object"
+			},
+			"CreateKnowledgeBaseRequestBody": {
+				"additionalProperties": false,
+				"properties": {
+					"name": { "description": "Knowledge base name", "type": "string" }
+				},
+				"required": ["name"],
+				"type": "object"
+			},
+			"CreateKnowledgeBaseResponseBody": {
+				"additionalProperties": false,
+				"properties": {
+					"result": { "$ref": "#/components/schemas/ExternalKnowledgeBase" }
+				},
+				"required": ["result"],
+				"type": "object"
+			},
+			"CreateKnowledgeItemRequestBody": {
+				"additionalProperties": false,
+				"properties": {
+					"content": {
+						"description": "Knowledge item content",
+						"type": "string"
+					},
+					"type": {
+						"default": "text",
+						"description": "Knowledge item type",
+						"type": "string"
+					}
+				},
+				"required": ["content"],
+				"type": "object"
+			},
+			"CreateKnowledgeItemResponseBody": {
+				"additionalProperties": false,
+				"properties": {
+					"result": { "$ref": "#/components/schemas/ExternalKnowledgeItem" }
+				},
+				"required": ["result"],
 				"type": "object"
 			},
 			"ErrorDetail": {
@@ -113,6 +153,77 @@
 				],
 				"type": "object"
 			},
+			"ExternalKnowledgeBase": {
+				"additionalProperties": false,
+				"properties": {
+					"bot_id": { "type": "string" },
+					"created_at": { "format": "date-time", "type": ["string", "null"] },
+					"id": { "type": "string" },
+					"name": { "type": "string" },
+					"position": { "format": "double", "type": "number" },
+					"updated_at": { "format": "date-time", "type": ["string", "null"] }
+				},
+				"required": [
+					"id",
+					"bot_id",
+					"name",
+					"position",
+					"created_at",
+					"updated_at"
+				],
+				"type": "object"
+			},
+			"ExternalKnowledgeChunk": {
+				"additionalProperties": false,
+				"properties": {
+					"bot_id": { "type": "string" },
+					"content": { "type": "string" },
+					"created_at": { "format": "date-time", "type": ["string", "null"] },
+					"embedding": {
+						"items": { "format": "float", "type": "number" },
+						"type": ["array", "null"]
+					},
+					"id": { "type": "string" },
+					"label": { "type": "string" },
+					"updated_at": { "format": "date-time", "type": ["string", "null"] }
+				},
+				"required": [
+					"id",
+					"label",
+					"content",
+					"bot_id",
+					"embedding",
+					"created_at",
+					"updated_at"
+				],
+				"type": "object"
+			},
+			"ExternalKnowledgeItem": {
+				"additionalProperties": false,
+				"properties": {
+					"bot_id": { "type": "string" },
+					"content": { "type": "string" },
+					"created_at": { "format": "date-time", "type": ["string", "null"] },
+					"id": { "type": "string" },
+					"knowledge_base_id": { "type": "string" },
+					"label": { "type": "string" },
+					"position": { "format": "double", "type": "number" },
+					"type": { "type": "string" },
+					"updated_at": { "format": "date-time", "type": ["string", "null"] }
+				},
+				"required": [
+					"id",
+					"knowledge_base_id",
+					"label",
+					"content",
+					"bot_id",
+					"position",
+					"type",
+					"created_at",
+					"updated_at"
+				],
+				"type": "object"
+			},
 			"ExternalSalesStage": {
 				"additionalProperties": false,
 				"properties": {
@@ -121,19 +232,21 @@
 					"id": { "type": "string" },
 					"instructions": { "type": "string" },
 					"name": { "type": "string" },
+					"position": { "format": "double", "type": "number" },
 					"updated_at": { "format": "date-time", "type": ["string", "null"] }
 				},
 				"required": [
 					"id",
 					"bot_id",
 					"name",
+					"position",
 					"instructions",
 					"created_at",
 					"updated_at"
 				],
 				"type": "object"
 			},
-			"GetBotsOutputBody": {
+			"GetBotsResponseBody": {
 				"additionalProperties": false,
 				"properties": {
 					"current_page": {
@@ -155,7 +268,81 @@
 				"required": ["total_entries", "entries", "limit", "current_page"],
 				"type": "object"
 			},
-			"GetKnowledgeBasesOutputBody": {
+			"GetKnowledgeBaseDetailResponseBody": {
+				"additionalProperties": false,
+				"properties": {
+					"result": { "$ref": "#/components/schemas/ExternalKnowledgeBase" }
+				},
+				"required": ["result"],
+				"type": "object"
+			},
+			"GetKnowledgeBasesResponseBody": {
+				"additionalProperties": false,
+				"properties": {
+					"current_page": {
+						"format": "int64",
+						"minimum": 0,
+						"type": "integer"
+					},
+					"entries": {
+						"items": { "$ref": "#/components/schemas/ExternalKnowledgeBase" },
+						"type": ["array", "null"]
+					},
+					"limit": { "format": "int64", "minimum": 0, "type": "integer" },
+					"total_entries": {
+						"format": "int64",
+						"minimum": 0,
+						"type": "integer"
+					}
+				},
+				"required": ["entries", "current_page", "total_entries", "limit"],
+				"type": "object"
+			},
+			"GetKnowledgeItemChunksResponseBody": {
+				"additionalProperties": false,
+				"properties": {
+					"current_page": {
+						"format": "int64",
+						"minimum": 0,
+						"type": "integer"
+					},
+					"entries": {
+						"items": { "$ref": "#/components/schemas/ExternalKnowledgeChunk" },
+						"type": ["array", "null"]
+					},
+					"limit": { "format": "int64", "minimum": 0, "type": "integer" },
+					"total_entries": {
+						"format": "int64",
+						"minimum": 0,
+						"type": "integer"
+					}
+				},
+				"required": ["total_entries", "entries", "limit", "current_page"],
+				"type": "object"
+			},
+			"GetKnowledgeItemsResponseBody": {
+				"additionalProperties": false,
+				"properties": {
+					"current_page": {
+						"format": "int64",
+						"minimum": 0,
+						"type": "integer"
+					},
+					"entries": {
+						"items": { "$ref": "#/components/schemas/ExternalKnowledgeItem" },
+						"type": ["array", "null"]
+					},
+					"limit": { "format": "int64", "minimum": 0, "type": "integer" },
+					"total_entries": {
+						"format": "int64",
+						"minimum": 0,
+						"type": "integer"
+					}
+				},
+				"required": ["total_entries", "entries", "limit", "current_page"],
+				"type": "object"
+			},
+			"GetMediaResponseBody": {
 				"additionalProperties": false,
 				"properties": {
 					"entries": {
@@ -166,18 +353,7 @@
 				"required": ["entries"],
 				"type": "object"
 			},
-			"GetMediaOutputBody": {
-				"additionalProperties": false,
-				"properties": {
-					"entries": {
-						"items": { "type": "string" },
-						"type": ["array", "null"]
-					}
-				},
-				"required": ["entries"],
-				"type": "object"
-			},
-			"GetProductsOutputBody": {
+			"GetProductsResponseBody": {
 				"additionalProperties": false,
 				"properties": {
 					"current_page": { "format": "int64", "type": "integer" },
@@ -191,7 +367,7 @@
 				"required": ["total_entries", "entries", "limit", "current_page"],
 				"type": "object"
 			},
-			"GetStagesOutputBody": {
+			"GetStagesResponseBody": {
 				"additionalProperties": false,
 				"properties": {
 					"entries": {
@@ -273,7 +449,7 @@
 					"200": {
 						"content": {
 							"application/json": {
-								"schema": { "$ref": "#/components/schemas/GetBotsOutputBody" }
+								"schema": { "$ref": "#/components/schemas/GetBotsResponseBody" }
 							}
 						},
 						"description": "OK"
@@ -328,7 +504,7 @@
 					}
 				},
 				"security": [{ "bearer": [] }],
-				"summary": "Get bot list",
+				"summary": "Fetch bot list",
 				"tags": ["Bot Management"]
 			},
 			"post": {
@@ -336,7 +512,7 @@
 				"requestBody": {
 					"content": {
 						"application/json": {
-							"schema": { "$ref": "#/components/schemas/CreateBotInputBody" }
+							"schema": { "$ref": "#/components/schemas/CreateBotRequestBody" }
 						}
 					},
 					"required": true
@@ -414,6 +590,32 @@
 						"name": "bot_id",
 						"required": true,
 						"schema": { "description": "Bot ID", "type": "string" }
+					},
+					{
+						"description": "Page number to return",
+						"explode": false,
+						"in": "query",
+						"name": "page",
+						"schema": {
+							"default": 1,
+							"description": "Page number to return",
+							"format": "int64",
+							"minimum": 0,
+							"type": "integer"
+						}
+					},
+					{
+						"description": "Limit the number of bots per page to return",
+						"explode": false,
+						"in": "query",
+						"name": "limit",
+						"schema": {
+							"default": 50,
+							"description": "Limit the number of bots per page to return",
+							"format": "int64",
+							"minimum": 0,
+							"type": "integer"
+						}
 					}
 				],
 				"responses": {
@@ -421,7 +623,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/GetKnowledgeBasesOutputBody"
+									"$ref": "#/components/schemas/GetKnowledgeBasesResponseBody"
 								}
 							}
 						},
@@ -477,13 +679,11 @@
 					}
 				},
 				"security": [{ "bearer": [] }],
-				"summary": "Get bot's knowledge bases",
+				"summary": "Fetch knowledge bases",
 				"tags": ["Bot Management"]
-			}
-		},
-		"/v1.0/bots/{bot_id}/media": {
-			"get": {
-				"operationId": "get_media",
+			},
+			"post": {
+				"operationId": "create_knowledge_base",
 				"parameters": [
 					{
 						"description": "Bot ID",
@@ -493,11 +693,23 @@
 						"schema": { "description": "Bot ID", "type": "string" }
 					}
 				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateKnowledgeBaseRequestBody"
+							}
+						}
+					},
+					"required": true
+				},
 				"responses": {
 					"200": {
 						"content": {
 							"application/json": {
-								"schema": { "$ref": "#/components/schemas/GetMediaOutputBody" }
+								"schema": {
+									"$ref": "#/components/schemas/CreateKnowledgeBaseResponseBody"
+								}
 							}
 						},
 						"description": "OK"
@@ -552,7 +764,487 @@
 					}
 				},
 				"security": [{ "bearer": [] }],
-				"summary": "Get bot's media list",
+				"summary": "Create a new knowledge base",
+				"tags": ["Bot Management"]
+			}
+		},
+		"/v1.0/bots/{bot_id}/bases/{knowledge_base_id}": {
+			"get": {
+				"operationId": "get_knowledge_base_detail",
+				"parameters": [
+					{
+						"description": "Bot ID",
+						"in": "path",
+						"name": "bot_id",
+						"required": true,
+						"schema": { "description": "Bot ID", "type": "string" }
+					},
+					{
+						"description": "Knowledge base ID",
+						"in": "path",
+						"name": "knowledge_base_id",
+						"required": true,
+						"schema": { "description": "Knowledge base ID", "type": "string" }
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetKnowledgeBaseDetailResponseBody"
+								}
+							}
+						},
+						"description": "OK"
+					},
+					"401": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"403": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Forbidden"
+					},
+					"404": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Not Found"
+					},
+					"422": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unprocessable Entity"
+					},
+					"429": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Too Many Requests"
+					},
+					"500": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Internal Server Error"
+					}
+				},
+				"security": [{ "bearer": [] }],
+				"summary": "Fetch knowledge base detail",
+				"tags": ["Bot Management"]
+			}
+		},
+		"/v1.0/bots/{bot_id}/bases/{knowledge_base_id}/items": {
+			"get": {
+				"operationId": "get_knowledge_items",
+				"parameters": [
+					{
+						"description": "Bot ID",
+						"in": "path",
+						"name": "bot_id",
+						"required": true,
+						"schema": { "description": "Bot ID", "type": "string" }
+					},
+					{
+						"description": "Knowledge base ID",
+						"in": "path",
+						"name": "knowledge_base_id",
+						"required": true,
+						"schema": { "description": "Knowledge base ID", "type": "string" }
+					},
+					{
+						"description": "Page number to return",
+						"explode": false,
+						"in": "query",
+						"name": "page",
+						"schema": {
+							"default": 1,
+							"description": "Page number to return",
+							"format": "int64",
+							"minimum": 0,
+							"type": "integer"
+						}
+					},
+					{
+						"description": "Limit the number of bots per page to return",
+						"explode": false,
+						"in": "query",
+						"name": "limit",
+						"schema": {
+							"default": 50,
+							"description": "Limit the number of bots per page to return",
+							"format": "int64",
+							"minimum": 0,
+							"type": "integer"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetKnowledgeItemsResponseBody"
+								}
+							}
+						},
+						"description": "OK"
+					},
+					"401": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"403": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Forbidden"
+					},
+					"404": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Not Found"
+					},
+					"422": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unprocessable Entity"
+					},
+					"429": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Too Many Requests"
+					},
+					"500": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Internal Server Error"
+					}
+				},
+				"security": [{ "bearer": [] }],
+				"summary": "Fetch knowledge items",
+				"tags": ["Bot Management"]
+			},
+			"post": {
+				"operationId": "create_knowledge_item",
+				"parameters": [
+					{
+						"description": "Bot ID",
+						"in": "path",
+						"name": "bot_id",
+						"required": true,
+						"schema": { "description": "Bot ID", "type": "string" }
+					},
+					{
+						"description": "Knowledge base ID",
+						"in": "path",
+						"name": "knowledge_base_id",
+						"required": true,
+						"schema": { "description": "Knowledge base ID", "type": "string" }
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateKnowledgeItemRequestBody"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateKnowledgeItemResponseBody"
+								}
+							}
+						},
+						"description": "OK"
+					},
+					"401": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"403": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Forbidden"
+					},
+					"404": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Not Found"
+					},
+					"422": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unprocessable Entity"
+					},
+					"429": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Too Many Requests"
+					},
+					"500": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Internal Server Error"
+					}
+				},
+				"security": [{ "bearer": [] }],
+				"summary": "Create a new knowledge item",
+				"tags": ["Bot Management"]
+			}
+		},
+		"/v1.0/bots/{bot_id}/bases/{knowledge_base_id}/items/{knowledge_item_id}/chunks": {
+			"get": {
+				"operationId": "get_knowledge_item_chunks",
+				"parameters": [
+					{
+						"description": "Bot ID",
+						"in": "path",
+						"name": "bot_id",
+						"required": true,
+						"schema": { "description": "Bot ID", "type": "string" }
+					},
+					{
+						"description": "Knowledge base ID",
+						"in": "path",
+						"name": "knowledge_base_id",
+						"required": true,
+						"schema": { "description": "Knowledge base ID", "type": "string" }
+					},
+					{
+						"description": "Knowledge item ID",
+						"in": "path",
+						"name": "knowledge_item_id",
+						"required": true,
+						"schema": { "description": "Knowledge item ID", "type": "string" }
+					},
+					{
+						"description": "Page number to return",
+						"explode": false,
+						"in": "query",
+						"name": "page",
+						"schema": {
+							"default": 1,
+							"description": "Page number to return",
+							"format": "int64",
+							"minimum": 0,
+							"type": "integer"
+						}
+					},
+					{
+						"description": "Limit the number of bots per page to return",
+						"explode": false,
+						"in": "query",
+						"name": "limit",
+						"schema": {
+							"default": 50,
+							"description": "Limit the number of bots per page to return",
+							"format": "int64",
+							"minimum": 0,
+							"type": "integer"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetKnowledgeItemChunksResponseBody"
+								}
+							}
+						},
+						"description": "OK"
+					},
+					"401": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"403": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Forbidden"
+					},
+					"404": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Not Found"
+					},
+					"422": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unprocessable Entity"
+					},
+					"429": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Too Many Requests"
+					},
+					"500": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Internal Server Error"
+					}
+				},
+				"security": [{ "bearer": [] }],
+				"summary": "Fetch knowledge item chunks",
+				"tags": ["Bot Management"]
+			}
+		},
+		"/v1.0/bots/{bot_id}/media": {
+			"get": {
+				"operationId": "get_media",
+				"parameters": [
+					{
+						"description": "Bot ID",
+						"in": "path",
+						"name": "bot_id",
+						"required": true,
+						"schema": { "description": "Bot ID", "type": "string" }
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetMediaResponseBody"
+								}
+							}
+						},
+						"description": "OK"
+					},
+					"401": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"403": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Forbidden"
+					},
+					"404": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Not Found"
+					},
+					"422": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unprocessable Entity"
+					},
+					"429": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Too Many Requests"
+					},
+					"500": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Internal Server Error"
+					}
+				},
+				"security": [{ "bearer": [] }],
+				"summary": "Fetch media list",
 				"tags": ["Bot Management"]
 			}
 		},
@@ -607,7 +1299,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/GetProductsOutputBody"
+									"$ref": "#/components/schemas/GetProductsResponseBody"
 								}
 							}
 						},
@@ -663,7 +1355,7 @@
 					}
 				},
 				"security": [{ "bearer": [] }],
-				"summary": "Get bot's products",
+				"summary": "Fetch products",
 				"tags": ["Bot Management"]
 			}
 		},
@@ -683,7 +1375,9 @@
 					"200": {
 						"content": {
 							"application/json": {
-								"schema": { "$ref": "#/components/schemas/GetStagesOutputBody" }
+								"schema": {
+									"$ref": "#/components/schemas/GetStagesResponseBody"
+								}
 							}
 						},
 						"description": "OK"
@@ -738,7 +1432,7 @@
 					}
 				},
 				"security": [{ "bearer": [] }],
-				"summary": "Get bot's sales stages",
+				"summary": "Fetch sales stages",
 				"tags": ["Bot Management"]
 			}
 		}

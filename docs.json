@@ -50,12 +50,17 @@
 					{
 						"group": "Bot Management",
 						"pages": [
-							"api-reference/bot-management/get-bot-list",
+							"api-reference/bot-management/fetch-bot-list",
 							"api-reference/bot-management/create-a-new-bot",
-							"api-reference/bot-management/get-bots-knowledge-bases",
-							"api-reference/bot-management/get-bots-media-list",
-							"api-reference/bot-management/get-bots-products",
-							"api-reference/bot-management/get-bots-sales-stages"
+							"api-reference/bot-management/fetch-knowledge-bases",
+							"api-reference/bot-management/create-a-new-knowledge-base",
+							"api-reference/bot-management/fetch-knowledge-base-detail",
+							"api-reference/bot-management/fetch-knowledge-items",
+							"api-reference/bot-management/create-a-new-knowledge-item",
+							"api-reference/bot-management/fetch-knowledge-item-chunks",
+							"api-reference/bot-management/fetch-media-list",
+							"api-reference/bot-management/fetch-products",
+							"api-reference/bot-management/fetch-sales-stages"
 						]
 					}
 				]
