@@ -15,7 +15,7 @@
 				"groups": [
 					{
 						"group": "Getting started",
-						"pages": ["index", "quickstart", "development"]
+						"pages": ["index", "quickstart"]
 					},
 					{
 						"group": "Customization",
@@ -80,7 +80,7 @@
 				},
                 {
 					"anchor": "Discord",
-					"href": "https://discord.gg/PqHbzrhZFE",
+					"href": "https://discord.gg/E2DDmWJX",
 					"icon": "discord"
 				},
 				{
