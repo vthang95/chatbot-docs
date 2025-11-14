@@ -58,11 +58,31 @@
           },
           {
             "group": "Endpoints",
+            "pages": []
+          },
+          {
+            "group": "Bot Management",
             "pages": [
               "api-reference/bot-management/get-bot-list",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/bot-management/create-a-new-bot"
+            ]
+          },
+          {
+            "group": "Media Management",
+            "pages": [
+              "api-reference/media-management/get-bots-media-list"
+            ]
+          },
+          {
+            "group": "Product Management",
+            "pages": [
+              "api-reference/product-management/get-bots-products"
+            ]
+          },
+          {
+            "group": "Stage Management",
+            "pages": [
+              "api-reference/stage-management/get-bots-sales-stages"
             ]
           }
         ]
