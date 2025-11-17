@@ -1,13 +1,13 @@
 {
 	"$schema": "https://mintlify.com/docs.json",
 	"theme": "mint",
-	"name": "Mint Starter Kit",
+	"name": "AIChatbot Starter Kit",
 	"colors": {
 		"primary": "#16A34A",
 		"light": "#07C983",
 		"dark": "#15803D"
 	},
-	"favicon": "/favicon.svg",
+	"favicon": "/logo/light.png",
 	"navigation": {
 		"tabs": [
 			{
@@ -104,20 +104,20 @@
 		}
 	},
 	"logo": {
-		"light": "/logo/light.svg",
-		"dark": "/logo/dark.svg"
+		"light": "/logo/light.png",
+		"dark": "/logo/dark.png"
 	},
 	"navbar": {
 		"links": [
 			{
 				"label": "Support",
-				"href": "mailto:hi@mintlify.com"
+				"href": "mailto:contact@aichatbot.im"
 			}
 		],
 		"primary": {
 			"type": "button",
 			"label": "Dashboard",
-			"href": "https://dashboard.mintlify.com"
+			"href": "https://app.aichatbot.im"
 		}
 	},
 	"contextual": {
