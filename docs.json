@@ -42,13 +42,14 @@
 			},
 			{
 				"tab": "API reference",
-				"groups": [
+				"dropdowns": [
 					{
 						"group": "API documentation",
 						"pages": ["api-reference/introduction"]
 					},
 					{
                         "group": "APIs",
+                        "icon": "square-terminal",
 						"pages": [
 							"api-reference/bot-management/fetch-bot-list",
 							"api-reference/bot-management/create-a-new-bot",
