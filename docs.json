@@ -41,7 +41,7 @@
 				]
 			},
 			{
-				"tab": "Chatbot API reference",
+				"tab": "Chatbot",
 				"groups": [
 					{
 						"group": "Introduction",
@@ -67,6 +67,10 @@
 			},
             {
 				"tab": "Livestream AI Avatar",
+                "group": []
+			},
+            {
+				"tab": "Image&Video Generation",
                 "group": []
 			}
 		],
