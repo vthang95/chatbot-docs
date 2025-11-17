@@ -48,6 +48,7 @@
 						"pages": ["api-reference/introduction"]
 					},
 					{
+                        "group": "APIs",
 						"dropdown": "Bot Management",
 						"pages": [
 							"api-reference/bot-management/fetch-bot-list",
