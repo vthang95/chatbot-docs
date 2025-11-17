@@ -42,14 +42,13 @@
 			},
 			{
 				"tab": "API reference",
-				"dropdowns": [
+				"groups": [
 					{
 						"group": "API documentation",
 						"pages": ["api-reference/introduction"]
 					},
 					{
-                        "group": "APIs",
-                        "icon": "square-terminal",
+                        "group": "ChatBOT APIs",
 						"pages": [
 							"api-reference/bot-management/fetch-bot-list",
 							"api-reference/bot-management/create-a-new-bot",
