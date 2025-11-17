@@ -72,6 +72,10 @@
             {
 				"tab": "Image&Video Generation",
                 "group": []
+			},
+            {
+				"tab": "AI translation",
+                "group": []
 			}
 		],
 		"global": {
