@@ -49,7 +49,6 @@
 					},
 					{
                         "group": "APIs",
-						"dropdown": "Bot Management",
 						"pages": [
 							"api-reference/bot-management/fetch-bot-list",
 							"api-reference/bot-management/create-a-new-bot",
