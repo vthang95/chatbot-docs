@@ -7,7 +7,7 @@
 		"light": "#07C983",
 		"dark": "#15803D"
 	},
-	"favicon": "/logo/light.png",
+	"favicon": "/logo/light_square.png",
 	"navigation": {
 		"tabs": [
 			{
@@ -67,15 +67,15 @@
 			},
             {
 				"tab": "Livestream AI Avatar",
-                "group": []
+                "group": ["comming-soon"]
 			},
             {
 				"tab": "Image&Video Generation",
-                "group": []
+                "group": ["comming-soon"]
 			},
             {
 				"tab": "AI translation",
-                "group": []
+                "group": ["comming-soon"]
 			}
 		],
 		"global": {
