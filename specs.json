@@ -173,13 +173,14 @@
 				"additionalProperties": false,
 				"properties": {
 					"content": {
-						"description": "Content of the message",
+						"description": "Content of the message. Could be text or image url based on the type.",
 						"type": "string"
 					},
 					"role": { "description": "Role of the message", "type": "string" },
 					"type": {
 						"default": "text",
 						"description": "Type of the message",
+						"enum": ["text", "image"],
 						"type": "string"
 					}
 				},
@@ -589,7 +590,7 @@
 		}
 	},
 	"info": {
-		"description": "AI Chatbot API Description...\u003cbr\u003e\u003ch1\u003eWebhook\u003c/h1\u003e\u003cbr\u003e[Learn more](https://google.com)",
+		"description": "Chatbot API",
 		"title": "AI Chatbot API",
 		"version": "1.0.0"
 	},
