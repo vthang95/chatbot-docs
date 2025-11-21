@@ -61,7 +61,7 @@
 			"anchors": [
 				{
 					"anchor": "Documentation",
-					"href": "https://docs.aichatbot.im",
+					"href": "https://docs.minostack.com",
 					"icon": "book-open-cover"
 				},
 				{
@@ -76,7 +76,7 @@
 				},
 				{
 					"anchor": "Blog",
-					"href": "https://blog.aichatbot.im",
+					"href": "https://blog.minostack.com",
 					"icon": "newspaper"
 				}
 			]
@@ -90,13 +90,13 @@
 		"links": [
 			{
 				"label": "Support",
-				"href": "mailto:contact@aichatbot.im"
+				"href": "mailto:contact@minostack.com"
 			}
 		],
 		"primary": {
 			"type": "button",
 			"label": "Dashboard",
-			"href": "https://app.aichatbot.im"
+			"href": "https://app.minostack.com"
 		}
 	},
 	"contextual": {
