@@ -1,6 +1,199 @@
 {
 	"components": {
 		"schemas": {
+			"ChatCompletionRequestBody": {
+				"additionalProperties": false,
+				"properties": {
+					"bot_id": { "description": "Bot ID", "type": "string" },
+					"conversation_id": {
+						"description": "Conversation ID",
+						"type": "string"
+					},
+					"max_tokens": {
+						"description": "Maximum number of tokens",
+						"format": "int64",
+						"type": "integer"
+					},
+					"messages": {
+						"description": "Messages",
+						"items": { "$ref": "#/components/schemas/CompletionMessage" },
+						"type": ["array", "null"]
+					},
+					"model": {
+						"default": "mino-chat-1-preview",
+						"description": "Model name",
+						"type": "string"
+					},
+					"temperature": {
+						"description": "Temperature",
+						"format": "double",
+						"type": "number"
+					},
+					"top_k": {
+						"description": "Top K",
+						"format": "int64",
+						"type": "integer"
+					}
+				},
+				"required": ["bot_id", "conversation_id", "model", "messages"],
+				"type": "object"
+			},
+			"ChatbotBot": {
+				"additionalProperties": false,
+				"properties": {
+					"created_at": { "format": "date-time", "type": ["string", "null"] },
+					"delay": { "format": "int64", "type": "integer" },
+					"description": { "type": "string" },
+					"id": { "type": "string" },
+					"instructions": { "type": "string" },
+					"language": { "type": "string" },
+					"metadata": { "type": "string" },
+					"name": { "type": "string" },
+					"owner_id": { "type": "string" },
+					"project_id": { "type": "string" },
+					"target": { "type": "string" },
+					"top_k": { "format": "int64", "type": "integer" },
+					"updated_at": { "format": "date-time", "type": ["string", "null"] },
+					"workflow_id": { "type": "string" }
+				},
+				"required": [
+					"id",
+					"name",
+					"project_id",
+					"description",
+					"target",
+					"instructions",
+					"language",
+					"workflow_id",
+					"owner_id",
+					"metadata",
+					"delay",
+					"top_k",
+					"created_at",
+					"updated_at"
+				],
+				"type": "object"
+			},
+			"ChatbotChunk": {
+				"additionalProperties": false,
+				"properties": {
+					"bot_id": { "type": "string" },
+					"content": { "type": "string" },
+					"created_at": { "format": "date-time", "type": ["string", "null"] },
+					"embedding": {
+						"items": { "format": "float", "type": "number" },
+						"type": ["array", "null"]
+					},
+					"id": { "type": "string" },
+					"knowledge_item_id": { "type": "string" },
+					"label": { "type": "string" },
+					"updated_at": { "format": "date-time", "type": ["string", "null"] }
+				},
+				"required": [
+					"id",
+					"label",
+					"content",
+					"knowledge_item_id",
+					"bot_id",
+					"embedding",
+					"created_at",
+					"updated_at"
+				],
+				"type": "object"
+			},
+			"ChatbotConversationStage": {
+				"additionalProperties": false,
+				"properties": {
+					"bot_id": { "type": "string" },
+					"created_at": { "format": "date-time", "type": ["string", "null"] },
+					"id": { "type": "string" },
+					"instructions": { "type": "string" },
+					"name": { "type": "string" },
+					"position": { "format": "double", "type": "number" },
+					"updated_at": { "format": "date-time", "type": ["string", "null"] }
+				},
+				"required": [
+					"id",
+					"bot_id",
+					"name",
+					"position",
+					"instructions",
+					"created_at",
+					"updated_at"
+				],
+				"type": "object"
+			},
+			"ChatbotKnowledgeBase": {
+				"additionalProperties": false,
+				"properties": {
+					"bot_id": { "type": "string" },
+					"created_at": { "format": "date-time", "type": ["string", "null"] },
+					"id": { "type": "string" },
+					"name": { "type": "string" },
+					"position": { "format": "double", "type": "number" },
+					"updated_at": { "format": "date-time", "type": ["string", "null"] }
+				},
+				"required": [
+					"id",
+					"bot_id",
+					"name",
+					"position",
+					"created_at",
+					"updated_at"
+				],
+				"type": "object"
+			},
+			"ChatbotSource": {
+				"additionalProperties": false,
+				"properties": {
+					"bot_id": { "type": "string" },
+					"content": { "type": "string" },
+					"created_at": { "format": "date-time", "type": ["string", "null"] },
+					"id": { "type": "string" },
+					"knowledge_base_id": { "type": "string" },
+					"label": { "type": "string" },
+					"position": { "format": "double", "type": "number" },
+					"type": { "type": "string" },
+					"updated_at": { "format": "date-time", "type": ["string", "null"] }
+				},
+				"required": [
+					"id",
+					"knowledge_base_id",
+					"label",
+					"content",
+					"bot_id",
+					"position",
+					"type",
+					"created_at",
+					"updated_at"
+				],
+				"type": "object"
+			},
+			"CompletionMessage": {
+				"additionalProperties": false,
+				"properties": {
+					"content": {
+						"description": "Content of the message",
+						"type": "string"
+					},
+					"role": { "description": "Role of the message", "type": "string" }
+				},
+				"required": ["role", "content"],
+				"type": "object"
+			},
+			"CompletionResponse": {
+				"additionalProperties": false,
+				"properties": {
+					"logs": { "$ref": "#/components/schemas/Log" },
+					"result": {
+						"items": { "$ref": "#/components/schemas/Item" },
+						"type": ["array", "null"]
+					},
+					"token_usage": { "$ref": "#/components/schemas/TokenUsage" }
+				},
+				"required": ["result", "logs", "token_usage"],
+				"type": "object"
+			},
 			"CreateBotRequestBody": {
 				"additionalProperties": false,
 				"properties": {
@@ -22,9 +215,36 @@
 						"description": "Target Outcome for the bot",
 						"enum": ["reply", "lead", "order"],
 						"type": "string"
-					}
+					},
+					"top_k": {
+						"default": 5,
+						"description": "Top K results of knowledge items. Higher value will increase the accuracy of the bot but will also increase the cost",
+						"format": "int64",
+						"type": "integer"
+					},
+					"workflow_id": { "description": "Workflow ID", "type": "string" }
 				},
 				"required": ["name"],
+				"type": "object"
+			},
+			"CreateConversationStageRequestBody": {
+				"additionalProperties": false,
+				"properties": {
+					"instructions": {
+						"description": "Sales stage instructions",
+						"type": "string"
+					},
+					"name": { "description": "Sales stage name", "type": "string" }
+				},
+				"required": ["name", "instructions"],
+				"type": "object"
+			},
+			"CreateConversationStageResponseBody": {
+				"additionalProperties": false,
+				"properties": {
+					"result": { "$ref": "#/components/schemas/ChatbotConversationStage" }
+				},
+				"required": ["result"],
 				"type": "object"
 			},
 			"CreateKnowledgeBaseRequestBody": {
@@ -38,12 +258,12 @@
 			"CreateKnowledgeBaseResponseBody": {
 				"additionalProperties": false,
 				"properties": {
-					"result": { "$ref": "#/components/schemas/ExternalKnowledgeBase" }
+					"result": { "$ref": "#/components/schemas/ChatbotKnowledgeBase" }
 				},
 				"required": ["result"],
 				"type": "object"
 			},
-			"CreateKnowledgeItemRequestBody": {
+			"CreateSourceRequestBody": {
 				"additionalProperties": false,
 				"properties": {
 					"content": {
@@ -59,10 +279,18 @@
 				"required": ["content"],
 				"type": "object"
 			},
-			"CreateKnowledgeItemResponseBody": {
+			"CreateSourceResponseBody": {
 				"additionalProperties": false,
 				"properties": {
-					"result": { "$ref": "#/components/schemas/ExternalKnowledgeItem" }
+					"result": { "$ref": "#/components/schemas/ChatbotSource" }
+				},
+				"required": ["result"],
+				"type": "object"
+			},
+			"DeleteConversationStageResponseBody": {
+				"additionalProperties": false,
+				"properties": {
+					"result": { "$ref": "#/components/schemas/ChatbotConversationStage" }
 				},
 				"required": ["result"],
 				"type": "object"
@@ -119,133 +347,6 @@
 				},
 				"type": "object"
 			},
-			"ExternalBot": {
-				"additionalProperties": false,
-				"properties": {
-					"chatbot_version": { "type": "string" },
-					"created_at": { "format": "date-time", "type": ["string", "null"] },
-					"delay": { "format": "int64", "type": "integer" },
-					"description": { "type": "string" },
-					"id": { "type": "string" },
-					"instructions": { "type": "string" },
-					"language": { "type": "string" },
-					"metadata": { "type": "string" },
-					"name": { "type": "string" },
-					"partner_id": { "type": "string" },
-					"target": { "type": "string" },
-					"updated_at": { "format": "date-time", "type": ["string", "null"] },
-					"workflow_id": { "$ref": "#/components/schemas/OptionalString" }
-				},
-				"required": [
-					"id",
-					"name",
-					"description",
-					"target",
-					"instructions",
-					"language",
-					"chatbot_version",
-					"workflow_id",
-					"partner_id",
-					"metadata",
-					"delay",
-					"created_at",
-					"updated_at"
-				],
-				"type": "object"
-			},
-			"ExternalKnowledgeBase": {
-				"additionalProperties": false,
-				"properties": {
-					"bot_id": { "type": "string" },
-					"created_at": { "format": "date-time", "type": ["string", "null"] },
-					"id": { "type": "string" },
-					"name": { "type": "string" },
-					"position": { "format": "double", "type": "number" },
-					"updated_at": { "format": "date-time", "type": ["string", "null"] }
-				},
-				"required": [
-					"id",
-					"bot_id",
-					"name",
-					"position",
-					"created_at",
-					"updated_at"
-				],
-				"type": "object"
-			},
-			"ExternalKnowledgeChunk": {
-				"additionalProperties": false,
-				"properties": {
-					"bot_id": { "type": "string" },
-					"content": { "type": "string" },
-					"created_at": { "format": "date-time", "type": ["string", "null"] },
-					"embedding": {
-						"items": { "format": "float", "type": "number" },
-						"type": ["array", "null"]
-					},
-					"id": { "type": "string" },
-					"label": { "type": "string" },
-					"updated_at": { "format": "date-time", "type": ["string", "null"] }
-				},
-				"required": [
-					"id",
-					"label",
-					"content",
-					"bot_id",
-					"embedding",
-					"created_at",
-					"updated_at"
-				],
-				"type": "object"
-			},
-			"ExternalKnowledgeItem": {
-				"additionalProperties": false,
-				"properties": {
-					"bot_id": { "type": "string" },
-					"content": { "type": "string" },
-					"created_at": { "format": "date-time", "type": ["string", "null"] },
-					"id": { "type": "string" },
-					"knowledge_base_id": { "type": "string" },
-					"label": { "type": "string" },
-					"position": { "format": "double", "type": "number" },
-					"type": { "type": "string" },
-					"updated_at": { "format": "date-time", "type": ["string", "null"] }
-				},
-				"required": [
-					"id",
-					"knowledge_base_id",
-					"label",
-					"content",
-					"bot_id",
-					"position",
-					"type",
-					"created_at",
-					"updated_at"
-				],
-				"type": "object"
-			},
-			"ExternalSalesStage": {
-				"additionalProperties": false,
-				"properties": {
-					"bot_id": { "type": "string" },
-					"created_at": { "format": "date-time", "type": ["string", "null"] },
-					"id": { "type": "string" },
-					"instructions": { "type": "string" },
-					"name": { "type": "string" },
-					"position": { "format": "double", "type": "number" },
-					"updated_at": { "format": "date-time", "type": ["string", "null"] }
-				},
-				"required": [
-					"id",
-					"bot_id",
-					"name",
-					"position",
-					"instructions",
-					"created_at",
-					"updated_at"
-				],
-				"type": "object"
-			},
 			"GetBotsResponseBody": {
 				"additionalProperties": false,
 				"properties": {
@@ -255,7 +356,7 @@
 						"type": "integer"
 					},
 					"entries": {
-						"items": { "$ref": "#/components/schemas/ExternalBot" },
+						"items": { "$ref": "#/components/schemas/ChatbotBot" },
 						"type": ["array", "null"]
 					},
 					"limit": { "format": "int64", "minimum": 0, "type": "integer" },
@@ -268,10 +369,23 @@
 				"required": ["total_entries", "entries", "limit", "current_page"],
 				"type": "object"
 			},
+			"GetConversationStagesResponseBody": {
+				"additionalProperties": false,
+				"properties": {
+					"entries": {
+						"items": {
+							"$ref": "#/components/schemas/ChatbotConversationStage"
+						},
+						"type": ["array", "null"]
+					}
+				},
+				"required": ["entries"],
+				"type": "object"
+			},
 			"GetKnowledgeBaseDetailResponseBody": {
 				"additionalProperties": false,
 				"properties": {
-					"result": { "$ref": "#/components/schemas/ExternalKnowledgeBase" }
+					"result": { "$ref": "#/components/schemas/ChatbotKnowledgeBase" }
 				},
 				"required": ["result"],
 				"type": "object"
@@ -285,7 +399,7 @@
 						"type": "integer"
 					},
 					"entries": {
-						"items": { "$ref": "#/components/schemas/ExternalKnowledgeBase" },
+						"items": { "$ref": "#/components/schemas/ChatbotKnowledgeBase" },
 						"type": ["array", "null"]
 					},
 					"limit": { "format": "int64", "minimum": 0, "type": "integer" },
@@ -296,50 +410,6 @@
 					}
 				},
 				"required": ["entries", "current_page", "total_entries", "limit"],
-				"type": "object"
-			},
-			"GetKnowledgeItemChunksResponseBody": {
-				"additionalProperties": false,
-				"properties": {
-					"current_page": {
-						"format": "int64",
-						"minimum": 0,
-						"type": "integer"
-					},
-					"entries": {
-						"items": { "$ref": "#/components/schemas/ExternalKnowledgeChunk" },
-						"type": ["array", "null"]
-					},
-					"limit": { "format": "int64", "minimum": 0, "type": "integer" },
-					"total_entries": {
-						"format": "int64",
-						"minimum": 0,
-						"type": "integer"
-					}
-				},
-				"required": ["total_entries", "entries", "limit", "current_page"],
-				"type": "object"
-			},
-			"GetKnowledgeItemsResponseBody": {
-				"additionalProperties": false,
-				"properties": {
-					"current_page": {
-						"format": "int64",
-						"minimum": 0,
-						"type": "integer"
-					},
-					"entries": {
-						"items": { "$ref": "#/components/schemas/ExternalKnowledgeItem" },
-						"type": ["array", "null"]
-					},
-					"limit": { "format": "int64", "minimum": 0, "type": "integer" },
-					"total_entries": {
-						"format": "int64",
-						"minimum": 0,
-						"type": "integer"
-					}
-				},
-				"required": ["total_entries", "entries", "limit", "current_page"],
 				"type": "object"
 			},
 			"GetMediaResponseBody": {
@@ -367,24 +437,140 @@
 				"required": ["total_entries", "entries", "limit", "current_page"],
 				"type": "object"
 			},
-			"GetStagesResponseBody": {
+			"GetSourceChunksResponseBody": {
 				"additionalProperties": false,
 				"properties": {
+					"current_page": {
+						"format": "int64",
+						"minimum": 0,
+						"type": "integer"
+					},
 					"entries": {
-						"items": { "$ref": "#/components/schemas/ExternalSalesStage" },
+						"items": { "$ref": "#/components/schemas/ChatbotChunk" },
 						"type": ["array", "null"]
+					},
+					"limit": { "format": "int64", "minimum": 0, "type": "integer" },
+					"total_entries": {
+						"format": "int64",
+						"minimum": 0,
+						"type": "integer"
 					}
 				},
-				"required": ["entries"],
+				"required": ["total_entries", "entries", "limit", "current_page"],
 				"type": "object"
 			},
-			"OptionalString": {
+			"GetSourcesResponseBody": {
 				"additionalProperties": false,
 				"properties": {
-					"String": { "type": "string" },
-					"Valid": { "type": "boolean" }
+					"current_page": {
+						"format": "int64",
+						"minimum": 0,
+						"type": "integer"
+					},
+					"entries": {
+						"items": { "$ref": "#/components/schemas/ChatbotSource" },
+						"type": ["array", "null"]
+					},
+					"limit": { "format": "int64", "minimum": 0, "type": "integer" },
+					"total_entries": {
+						"format": "int64",
+						"minimum": 0,
+						"type": "integer"
+					}
 				},
-				"required": ["String", "Valid"],
+				"required": ["total_entries", "entries", "limit", "current_page"],
+				"type": "object"
+			},
+			"Item": {
+				"additionalProperties": false,
+				"properties": {
+					"type": { "type": "string" },
+					"value": { "type": "string" }
+				},
+				"required": ["type", "value"],
+				"type": "object"
+			},
+			"Log": {
+				"additionalProperties": false,
+				"properties": {
+					"children": {
+						"items": { "$ref": "#/components/schemas/Log" },
+						"type": ["array", "null"]
+					},
+					"extra": { "additionalProperties": {}, "type": "object" },
+					"finish_time": { "format": "int64", "type": "integer" },
+					"start_time": { "format": "int64", "type": "integer" },
+					"token_usage": { "$ref": "#/components/schemas/TokenUsage" },
+					"type": { "type": "string" }
+				},
+				"required": [
+					"token_usage",
+					"start_time",
+					"finish_time",
+					"type",
+					"extra",
+					"children"
+				],
+				"type": "object"
+			},
+			"TokenUsage": {
+				"additionalProperties": false,
+				"properties": {
+					"input": { "format": "int64", "type": "integer" },
+					"output": { "format": "int64", "type": "integer" },
+					"total_tokens": { "format": "int64", "type": "integer" }
+				},
+				"required": ["input", "output", "total_tokens"],
+				"type": "object"
+			},
+			"UpdateBotRequestBody": {
+				"additionalProperties": false,
+				"properties": {
+					"delay": {
+						"description": "Delay bot execution in seconds",
+						"format": "int64",
+						"type": "integer"
+					},
+					"description": { "description": "Bot description", "type": "string" },
+					"instructions": {
+						"description": "Bot instructions",
+						"type": "string"
+					},
+					"language": {
+						"description": "Bot language. Supported ISO 639-1 language code",
+						"type": "string"
+					},
+					"name": { "description": "Bot name", "type": "string" },
+					"target": {
+						"description": "Target Outcome for the bot",
+						"enum": ["reply", "lead", "order"],
+						"type": "string"
+					},
+					"top_k": {
+						"description": "Top K results of knowledge items. Higher value will increase the accuracy of the bot but will also increase the cost",
+						"format": "int64",
+						"type": "integer"
+					}
+				},
+				"type": "object"
+			},
+			"UpdateConversationStageRequestBody": {
+				"additionalProperties": false,
+				"properties": {
+					"instructions": {
+						"description": "Sales stage instructions",
+						"type": "string"
+					},
+					"name": { "description": "Sales stage name", "type": "string" }
+				},
+				"type": "object"
+			},
+			"UpdateConversationStageResponseBody": {
+				"additionalProperties": false,
+				"properties": {
+					"result": { "$ref": "#/components/schemas/ChatbotConversationStage" }
+				},
+				"required": ["result"],
 				"type": "object"
 			}
 		},
@@ -521,7 +707,7 @@
 					"200": {
 						"content": {
 							"application/json": {
-								"schema": { "$ref": "#/components/schemas/ExternalBot" }
+								"schema": { "$ref": "#/components/schemas/ChatbotBot" }
 							}
 						},
 						"description": "OK"
@@ -577,6 +763,89 @@
 				},
 				"security": [{ "bearer": [] }],
 				"summary": "Create a new bot",
+				"tags": ["Bot Management"]
+			}
+		},
+		"/v1.0/bots/{bot_id}": {
+			"put": {
+				"operationId": "update_bot",
+				"parameters": [
+					{
+						"description": "Bot ID",
+						"in": "path",
+						"name": "bot_id",
+						"required": true,
+						"schema": { "description": "Bot ID", "type": "string" }
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": { "$ref": "#/components/schemas/UpdateBotRequestBody" }
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/ChatbotBot" }
+							}
+						},
+						"description": "OK"
+					},
+					"401": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"403": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Forbidden"
+					},
+					"404": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Not Found"
+					},
+					"422": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unprocessable Entity"
+					},
+					"429": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Too Many Requests"
+					},
+					"500": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Internal Server Error"
+					}
+				},
+				"security": [{ "bearer": [] }],
+				"summary": "Update a bot",
 				"tags": ["Bot Management"]
 			}
 		},
@@ -852,9 +1121,9 @@
 				"tags": ["Bot Management"]
 			}
 		},
-		"/v1.0/bots/{bot_id}/bases/{knowledge_base_id}/items": {
+		"/v1.0/bots/{bot_id}/bases/{knowledge_base_id}/sources": {
 			"get": {
-				"operationId": "get_knowledge_items",
+				"operationId": "get_sources",
 				"parameters": [
 					{
 						"description": "Bot ID",
@@ -902,7 +1171,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/GetKnowledgeItemsResponseBody"
+									"$ref": "#/components/schemas/GetSourcesResponseBody"
 								}
 							}
 						},
@@ -958,11 +1227,11 @@
 					}
 				},
 				"security": [{ "bearer": [] }],
-				"summary": "Fetch knowledge items",
+				"summary": "Fetch sources",
 				"tags": ["Bot Management"]
 			},
 			"post": {
-				"operationId": "create_knowledge_item",
+				"operationId": "create_source",
 				"parameters": [
 					{
 						"description": "Bot ID",
@@ -983,7 +1252,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/CreateKnowledgeItemRequestBody"
+								"$ref": "#/components/schemas/CreateSourceRequestBody"
 							}
 						}
 					},
@@ -994,7 +1263,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/CreateKnowledgeItemResponseBody"
+									"$ref": "#/components/schemas/CreateSourceResponseBody"
 								}
 							}
 						},
@@ -1050,13 +1319,13 @@
 					}
 				},
 				"security": [{ "bearer": [] }],
-				"summary": "Create a new knowledge item",
+				"summary": "Create a new source",
 				"tags": ["Bot Management"]
 			}
 		},
-		"/v1.0/bots/{bot_id}/bases/{knowledge_base_id}/items/{knowledge_item_id}/chunks": {
+		"/v1.0/bots/{bot_id}/bases/{knowledge_base_id}/sources/{source_id}/chunks": {
 			"get": {
-				"operationId": "get_knowledge_item_chunks",
+				"operationId": "get_source_chunks",
 				"parameters": [
 					{
 						"description": "Bot ID",
@@ -1075,7 +1344,7 @@
 					{
 						"description": "Knowledge item ID",
 						"in": "path",
-						"name": "knowledge_item_id",
+						"name": "source_id",
 						"required": true,
 						"schema": { "description": "Knowledge item ID", "type": "string" }
 					},
@@ -1111,7 +1380,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/GetKnowledgeItemChunksResponseBody"
+									"$ref": "#/components/schemas/GetSourceChunksResponseBody"
 								}
 							}
 						},
@@ -1167,7 +1436,7 @@
 					}
 				},
 				"security": [{ "bearer": [] }],
-				"summary": "Fetch knowledge item chunks",
+				"summary": "Fetch source chunks",
 				"tags": ["Bot Management"]
 			}
 		},
@@ -1361,7 +1630,7 @@
 		},
 		"/v1.0/bots/{bot_id}/stages": {
 			"get": {
-				"operationId": "get_stages",
+				"operationId": "get_conversation_stages",
 				"parameters": [
 					{
 						"description": "Bot ID",
@@ -1376,7 +1645,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/GetStagesResponseBody"
+									"$ref": "#/components/schemas/GetConversationStagesResponseBody"
 								}
 							}
 						},
@@ -1432,8 +1701,352 @@
 					}
 				},
 				"security": [{ "bearer": [] }],
-				"summary": "Fetch sales stages",
+				"summary": "Fetch Conversation Stages",
 				"tags": ["Bot Management"]
+			},
+			"post": {
+				"operationId": "create_conversation_stage",
+				"parameters": [
+					{
+						"description": "Bot ID",
+						"in": "path",
+						"name": "bot_id",
+						"required": true,
+						"schema": { "description": "Bot ID", "type": "string" }
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateConversationStageRequestBody"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateConversationStageResponseBody"
+								}
+							}
+						},
+						"description": "OK"
+					},
+					"401": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"403": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Forbidden"
+					},
+					"404": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Not Found"
+					},
+					"422": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unprocessable Entity"
+					},
+					"429": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Too Many Requests"
+					},
+					"500": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Internal Server Error"
+					}
+				},
+				"security": [{ "bearer": [] }],
+				"summary": "Create a new Conversation Stage",
+				"tags": ["Bot Management"]
+			}
+		},
+		"/v1.0/bots/{bot_id}/stages/{conversation_stage_id}": {
+			"delete": {
+				"operationId": "delete_conversation_stage",
+				"parameters": [
+					{
+						"description": "Bot ID",
+						"in": "path",
+						"name": "bot_id",
+						"required": true,
+						"schema": { "description": "Bot ID", "type": "string" }
+					},
+					{
+						"description": "Conversation Stage ID",
+						"in": "path",
+						"name": "stage_id",
+						"required": true,
+						"schema": {
+							"description": "Conversation Stage ID",
+							"type": "string"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/DeleteConversationStageResponseBody"
+								}
+							}
+						},
+						"description": "OK"
+					},
+					"401": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"403": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Forbidden"
+					},
+					"404": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Not Found"
+					},
+					"422": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unprocessable Entity"
+					},
+					"429": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Too Many Requests"
+					},
+					"500": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Internal Server Error"
+					}
+				},
+				"security": [{ "bearer": [] }],
+				"summary": "Delete a Conversation Stage",
+				"tags": ["Bot Management"]
+			},
+			"put": {
+				"operationId": "update_conversation_stage",
+				"parameters": [
+					{
+						"description": "Bot ID",
+						"in": "path",
+						"name": "bot_id",
+						"required": true,
+						"schema": { "description": "Bot ID", "type": "string" }
+					},
+					{
+						"description": "Conversation Stage ID",
+						"in": "path",
+						"name": "stage_id",
+						"required": true,
+						"schema": {
+							"description": "Conversation Stage ID",
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateConversationStageRequestBody"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UpdateConversationStageResponseBody"
+								}
+							}
+						},
+						"description": "OK"
+					},
+					"401": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"403": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Forbidden"
+					},
+					"404": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Not Found"
+					},
+					"422": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unprocessable Entity"
+					},
+					"429": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Too Many Requests"
+					},
+					"500": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Internal Server Error"
+					}
+				},
+				"security": [{ "bearer": [] }],
+				"summary": "Update new Conversation Stage",
+				"tags": ["Bot Management"]
+			}
+		},
+		"/v1.0/chat/completions": {
+			"post": {
+				"description": "Chat completion API. Currently we only support mino-chat-1-preview model.",
+				"operationId": "chat_completion",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ChatCompletionRequestBody"
+							}
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/CompletionResponse" }
+							}
+						},
+						"description": "OK"
+					},
+					"401": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unauthorized"
+					},
+					"403": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Forbidden"
+					},
+					"404": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Not Found"
+					},
+					"422": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Unprocessable Entity"
+					},
+					"429": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Too Many Requests"
+					},
+					"500": {
+						"content": {
+							"application/problem+json": {
+								"schema": { "$ref": "#/components/schemas/ErrorModel" }
+							}
+						},
+						"description": "Internal Server Error"
+					}
+				},
+				"security": [{ "bearer": [] }],
+				"summary": "Chat completion",
+				"tags": ["Chat Completions"]
 			}
 		}
 	},
