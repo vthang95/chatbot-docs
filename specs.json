@@ -176,9 +176,14 @@
 						"description": "Content of the message",
 						"type": "string"
 					},
-					"role": { "description": "Role of the message", "type": "string" }
+					"role": { "description": "Role of the message", "type": "string" },
+					"type": {
+						"default": "text",
+						"description": "Type of the message",
+						"type": "string"
+					}
 				},
-				"required": ["role", "content"],
+				"required": ["role", "content", "type"],
 				"type": "object"
 			},
 			"CompletionResponse": {
@@ -2050,5 +2055,5 @@
 			}
 		}
 	},
-	"servers": [{ "url": "http://localhost:5500" }]
+	"servers": [{ "url": "https://api.minostack.com" }]
 }
