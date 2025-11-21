@@ -29,21 +29,31 @@
 					{
 						"group": "Bot Management",
 						"pages": [
+                            "api-reference/bot-management/create-a-new-bot",
 							"api-reference/bot-management/fetch-bot-list",
-							"api-reference/bot-management/create-a-new-bot",
-							"api-reference/bot-management/update-a-bot",
-							"api-reference/bot-management/fetch-knowledge-bases",
-							"api-reference/bot-management/create-a-new-knowledge-base",
-							"api-reference/bot-management/fetch-knowledge-base-detail",
-							"api-reference/bot-management/fetch-sources",
-							"api-reference/bot-management/create-a-new-source",
-							"api-reference/bot-management/fetch-source-chunks",
-							"api-reference/bot-management/fetch-conversation-stages",
-							"api-reference/bot-management/create-a-new-conversation-stage",
-							"api-reference/bot-management/update-new-conversation-stage",
-							"api-reference/bot-management/delete-a-conversation-stage"
+							"api-reference/bot-management/update-a-bot"
 						]
 					},
+                    {
+                      "group": "Knowledge Base",
+                      "pages": [
+                        "api-reference/bot-management/create-a-new-knowledge-base",
+                        "api-reference/bot-management/fetch-knowledge-bases",
+                        "api-reference/bot-management/fetch-knowledge-base-detail",
+                        "api-reference/bot-management/fetch-sources",
+                        "api-reference/bot-management/create-a-new-source",
+                        "api-reference/bot-management/fetch-source-chunks"
+                      ]
+                    },
+                    {
+                      "group": "Conversation Stages",
+                      "pages": [
+                        "api-reference/bot-management/fetch-conversation-stages",
+                        "api-reference/bot-management/create-a-new-conversation-stage",
+                        "api-reference/bot-management/update-new-conversation-stage",
+    					"api-reference/bot-management/delete-a-conversation-stage"
+                      ]
+                    },
 					{
 						"group": "Chat Completions",
 						"pages": ["api-reference/chat-completions/chat-completion"]
