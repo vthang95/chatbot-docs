@@ -1,0 +1,27 @@
+---
+title: "Handle incoming webhooks"
+description: "How to parse, validate and handle webhooks and monitor their deliveries on Minostack"
+---
+
+Once a webhook endpoint is setup and verified, you can start receiving webhooks and will have access to the delivery overview page. Here you can:
+
+- See the delivery status of your webhooks
+- Review payload sent
+- Trigger redelivery in case of failure
+
+# Validate & Parse webhooks
+Use the SDKs [available on GitHub](https://github.com/standard-webhooks/standard-webhooks) to validate and parse the webhooks.
+
+# Failure handling
+
+### Delivery Retries
+If we hit an error while trying to reach your endpoint, whether it is a temporary network error or a bug, we’ll retry to send the event up to 5 times with an exponential backoff.
+
+### Deliver Timeout
+We timeout our requests to your endpoint after 20 seconds. Triggering a retry attempt after a delay as explained above. However, we strongly recommend you optimize your endpoint route to be fast. A best practice is for your webhook handler to queue a background worker task to handle the payload asynchronously.
+
+
+### Invalid signature exceptions
+Rolling your own webhook validation logic? Make sure to base64 encode the secret you configured on Minostack in your code before generating the signature to validate against.
+
+

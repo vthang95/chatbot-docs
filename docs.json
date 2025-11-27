@@ -16,7 +16,11 @@
 					{
 						"group": "Getting started",
 						"pages": ["index", "api-keys"]
-					}
+					},
+          {
+            "group": "Webhooks",
+            "pages": ["webhook-endpoint", "handle-incoming-webhooks", "webhook-events"]
+          }
 				]
 			},
 			{
@@ -56,8 +60,18 @@
                     },
 					{
 						"group": "Chat Completions",
-						"pages": ["api-reference/chat-completions/chat-completion"]
-					}
+						"pages": [
+              "api-reference/chat-completions/chat-completion",
+              "api-reference/chat-completions/chat-completion-detail"
+            ]
+					},
+          {
+            "group": "Webhooks",
+            "pages": [
+              "api-reference/challenge",
+              "api-reference/completion.done"
+            ]
+          }
 				]
 			},
 			{

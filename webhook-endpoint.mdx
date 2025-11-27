@@ -1,0 +1,40 @@
+---
+title: "Setup an endpoint"
+description: "Setup an endpoint to receive asynchronous notifications from Minostack"
+---
+
+Out webhook implementation follows the [Standard Webhooks](https://www.standardwebhooks.com/) specification.
+You can find the SDKs for most popular programming languages on the [SDKs page](https://github.com/standard-webhooks/standard-webhooks).
+
+
+# Get Started
+
+<Info>
+  We do not offer sandbox envrionment during development.
+</Info>
+
+<Steps>
+  <Step title="Create a new webhook">
+    Go to [Webhooks](https://platform.minostack.com/webhooks) and click on `Create Webhook` button to create new webhook.
+  </Step>
+  <Step title="Specify your endpoint URL">
+    Specify your endpoint URL in the `Endpoint URL` field. We will sent a POST request to this URL when the webhook is triggered.
+    <Tip>
+      <b>Local development?</b><br /><br />
+      You can use tool like [ngrok](https://ngrok.com/) to tunnel webhook events to your local development envrionment. This will allow you to test your webhook handlers without deploying them to live server.<br /><br />
+      <CodeBlock>
+        ngrok http 8080
+      </CodeBlock>
+    </Tip>
+  </Step>
+  <Step title="Specify the secret">
+    Specify the secret in the `Secret` field. This is used to verify the authenticity of the webhook request.
+    Secret accept only alphanumeric characters with a length of at least 24 characters and maximum of 64 characters.
+  </Step>
+  <Step title="Specify the events">
+    Specify the events you want to receive. You can only add one event at a time.
+  </Step>
+  <Step title="Subscribe to events">
+    After click on `Create` button, you will be received a [challenge request](/api-reference/challenge). You must response `challenge_id` back to verify your valid webhook.
+  </Step>
+</Steps>
