@@ -55,7 +55,7 @@
                         "api-reference/bot-management/fetch-conversation-stages",
                         "api-reference/bot-management/create-a-new-conversation-stage",
                         "api-reference/bot-management/update-new-conversation-stage",
-    					"api-reference/bot-management/delete-a-conversation-stage"
+                        "api-reference/bot-management/delete-a-conversation-stage"
                       ]
                     },
 					{
