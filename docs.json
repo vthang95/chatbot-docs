@@ -33,8 +33,9 @@
 					{
 						"group": "Bot Management",
 						"pages": [
-                            "api-reference/bot-management/create-a-new-bot",
-							"api-reference/bot-management/fetch-bot-list",
+              "api-reference/bot-management/create-a-new-bot",
+              "api-reference/bot-management/fetch-bot-list",
+              "api-reference/bot-management/get-bot-detail",
 							"api-reference/bot-management/update-a-bot"
 						]
 					},
