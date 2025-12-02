@@ -70,7 +70,8 @@
             "group": "Webhooks",
             "pages": [
               "api-reference/challenge",
-              "api-reference/completion.done"
+              "api-reference/completion.done",
+              "api-reference/source.status"
             ]
           }
 				]
