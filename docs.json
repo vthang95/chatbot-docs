@@ -20,6 +20,10 @@
           {
             "group": "Webhooks",
             "pages": ["webhook-endpoint", "handle-incoming-webhooks", "webhook-events"]
+          },
+          {
+            "group": "Pricing",
+            "pages": ["credits", "completion-pricing", "knowledge-ingestion-pricing"]
           }
 				]
 			},
