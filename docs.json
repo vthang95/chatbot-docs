@@ -40,18 +40,38 @@
               "api-reference/bot-management/create-a-new-bot",
               "api-reference/bot-management/fetch-bot-list",
               "api-reference/bot-management/get-bot-detail",
-							"api-reference/bot-management/update-a-bot"
+							"api-reference/bot-management/update-a-bot",
+              "api-reference/bot-management/fetch-bot-products",
+              "api-reference/bot-management/add-product-to-bot",
+              "api-reference/bot-management/remove-product-from-bot",
+              "api-reference/bot-management/fetch-bot-knowledge-bases",
+              "api-reference/bot-management/add-knowledge-base-to-bot",
+              "api-reference/bot-management/remove-knowledge-base-from-bot"
 						]
 					},
                     {
                       "group": "Knowledge Base",
                       "pages": [
-                        "api-reference/bot-management/create-a-new-knowledge-base",
-                        "api-reference/bot-management/fetch-knowledge-bases",
-                        "api-reference/bot-management/fetch-knowledge-base-detail",
-                        "api-reference/bot-management/fetch-sources",
-                        "api-reference/bot-management/create-a-new-source",
-                        "api-reference/bot-management/fetch-source-chunks"
+                        "api-reference/knowledge-base/fetch-knowledge-bases",
+                        "api-reference/knowledge-base/create-a-new-knowledge-base",
+                        "api-reference/knowledge-base/fetch-knowledge-base-detail",
+                        "api-reference/knowledge-base/fetch-sources",
+                        "api-reference/knowledge-base/create-a-new-source",
+                        "api-reference/knowledge-base/fetch-source-chunks"
+                      ]
+                    },
+                    {
+                      "group": "Product Management",
+                      "pages": [
+                        "api-reference/product-management/fetch-products",
+                        "api-reference/product-management/create-new-products",
+                        "api-reference/product-management/get-product-detail",
+                        "api-reference/product-management/update-a-product",
+                        "api-reference/product-management/delete-a-product",
+                        "api-reference/product-management/create-a-variant",
+                        "api-reference/product-management/get-a-variant",
+                        "api-reference/product-management/update-a-variant",
+                        "api-reference/product-management/delete-a-variant"
                       ]
                     },
                     {
